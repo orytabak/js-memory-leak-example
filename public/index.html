@@ -12,23 +12,25 @@
 		<button class="btn btn-outline-primary" onclick="toggle()">Start saving references</button>
 		<button class="btn btn-outline-primary" onclick="clearReferences()">Clear References</button>
 	</div>
-	<div class="jumbotron" id="content1">
-		When you click "Start", the application will start creating unneeded objects and store references to them.<br>
-		When you click "Stop", it will stop creating these objects, but their references still exist.<br>
-		When you click "Clear", the references causing the memory leak will be removed, and the memory can be reallocated.<br><br>
-		<button class="btn btn-primary" onclick="next()" style="float:right;">Next</button>
-	</div>
-	<div class="jumbotron" id="content2" style="display:none">
-		To see how this effects memory:<br>
-		1) Go to chrome devTools and choose "performance" tab.<br>
-		2) Make sure "Memory" checkbox is checked, and then click "record".<br>
-		<img src="record.png" style="margin:10px 0 10px 0;"><br>
-		3) Click the "Start saving references" button, and wait a few seconds.<br>
-		4) Click the "Stop saving references" button, and wait a few seconds.<br>
-		5) Click "Clear references" button.<br>
-		6) In the devTools, click the "Collect garbage" icon.<br>
-		<img src="collect.png" style="margin:10px 0 10px 0;"><br>
-		7) Now finish the recording.
+	<div class="content">
+		<div class="jumbotron" id="content1">
+			When you click "Start", the application will start creating unneeded objects and store references to them.<br>
+			When you click "Stop", it will stop creating these objects, but their references still exist.<br>
+			When you click "Clear", the references causing the memory leak will be removed, and the memory can be reallocated.<br><br>
+			<button class="btn btn-primary" onclick="next()" style="float:right;">Next</button>
+		</div>
+		<div class="jumbotron" id="content2" style="display:none">
+			To see how this effects memory:<br>
+			1) Go to chrome devTools and choose "performance" tab.<br>
+			2) Make sure "Memory" checkbox is checked, and then click "record".<br>
+			<img src="record.png" style="margin:10px 0 10px 0;"><br>
+			3) Click the "Start saving references" button, and wait a few seconds.<br>
+			4) Click the "Stop saving references" button, and wait a few seconds.<br>
+			5) Click "Clear references" button.<br>
+			6) In the devTools, click the "Collect garbage" icon.<br>
+			<img src="collect.png" style="margin:10px 0 10px 0;"><br>
+			7) Now finish the recording.
+		</div>
 	</div>
 </body>
 

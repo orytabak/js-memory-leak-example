@@ -13,3 +13,12 @@
 .btn:not(:first-child) {
     margin-left: 10px;
 }
+
+.jumbotron {
+    max-width: 1000px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+}
