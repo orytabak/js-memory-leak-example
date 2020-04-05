@@ -1,36 +1,66 @@
 <!DOCTYPE HTML>
 <html>
 
+<head>
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<link rel="stylesheet" href="index.css">
+</head>
+
 <body>
-	Hello World!
-	<button onclick="toggle()">Start saving references</button>
-	<button onclick="clearReferences()">Clear References</button>
+	<h3 class="title">How does a memory leak look like?</h3>
+	<div class="container btns-container">
+		<button class="btn btn-outline-primary" onclick="toggle()">Start saving references</button>
+		<button class="btn btn-outline-primary" onclick="clearReferences()">Clear References</button>
+	</div>
+	<div class="jumbotron" id="content1">
+		When you click "Start", the application will start creating unneeded objects and store references to them.<br>
+		When you click "Stop", it will stop creating these objects, but their references still exist.<br>
+		When you click "Clear", the references causing the memory leak will be removed, and the memory can be reallocated.<br><br>
+		<button class="btn btn-primary" onclick="next()" style="float:right;">Next</button>
+	</div>
+	<div class="jumbotron" id="content2" style="display:none">
+		To see how this effects memory:<br>
+		1) Go to chrome devTools and choose "performance" tab.<br>
+		2) Make sure "Memory" checkbox is checked, and then click "record".<br>
+		<img src="record.png" style="margin:10px 0 10px 0;"><br>
+		3) Click the "Start saving references" button, and wait a few seconds.<br>
+		4) Click the "Stop saving references" button, and wait a few seconds.<br>
+		5) Click "Clear references" button.<br>
+		6) In the devTools, click the "Collect garbage" icon.<br>
+		<img src="collect.png" style="margin:10px 0 10px 0;"><br>
+		7) Now finish the recording.
+	</div>
 </body>
 
 <script>
-let references = [];
-let running = false;
-let interval;
-let btn = document.querySelector('button');
+	let references = [];
+	let running = false;
+	let interval;
+	let btn = document.querySelector('button');
 
-function toggle() {
-	running = !running;
-	if(running) {
-		interval = setInterval(createMemleak.bind(this), 10);
-		btn.innerHTML = "Stop saving references";
-	} else {
-		clearInterval(interval)
-		btn.innerHTML = "Start saving references";
+	function toggle() {
+		running = !running;
+		if (running) {
+			interval = setInterval(createMemleak.bind(this), 10);
+			btn.innerHTML = "Stop saving references";
+		} else {
+			clearInterval(interval)
+			btn.innerHTML = "Start saving references";
+		}
 	}
-}
 
-function clearReferences() {
-	references = [];
-}
+	function clearReferences() {
+		references = [];
+	}
 
-function createMemleak( ) {
-	references.push(new MyMemoryLeak())
-}
+	function next() {
+		document.getElementById('content1').style.display = "none";
+		document.getElementById('content2').style.display = "block";
+	}
+
+	function createMemleak() {
+		references.push(new MyMemoryLeak())
+	}
 
 
 	class MyMemoryLeak {
