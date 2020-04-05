@@ -2,6 +2,47 @@
 <html>
 
 <body>
-	Hello!
+	Hello World!
+	<button onclick="toggle()">Start saving references</button>
+	<button onclick="clearReferences()">Clear References</button>
 </body>
+
+<script>
+let references = [];
+let running = false;
+let interval;
+let btn = document.querySelector('button');
+
+function toggle() {
+	running = !running;
+	if(running) {
+		interval = setInterval(createMemleak.bind(this), 10);
+		btn.innerHTML = "Stop saving references";
+	} else {
+		clearInterval(interval)
+		btn.innerHTML = "Start saving references";
+	}
+}
+
+function clearReferences() {
+	references = [];
+}
+
+function createMemleak( ) {
+	references.push(new MyMemoryLeak())
+}
+
+
+	class MyMemoryLeak {
+
+		constructor() {
+
+			this.value = new Array(10000).map(v => new Array(10).join('*'));
+			console.log('created');
+
+		}
+	}
+
+</script>
+
 </html>
